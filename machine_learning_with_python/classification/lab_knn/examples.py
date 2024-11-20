@@ -21,6 +21,8 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn import metrics
 
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Data Visualization and Analysis 
 df = pd.read_csv(r'machine_learning_with_python\classification\lab_knn\teleCust1000t.csv')
@@ -67,3 +69,38 @@ print(yhat[0:5])
 # In multilabel classification, accuracy classification score is a function that computes subset accuracy. This function is equal to the jaccard_score function. Essentially, it calculates how closely the actual labels and predicted labels are matched in the test set.
 print('Train set Accuracy: ', metrics.accuracy_score(y_train, neigh.predict(X_train)))
 print('Test set Accuracy: ', metrics.accuracy_score(y_test, yhat))
+
+##############################################################
+# K in KNN, is the number of nearest neighbors to examine. It is supposed to be specified by the user. So, how can we choose right value for K? The general solution is to reserve a part of your data for testing the accuracy of the model. Then choose k =1, use the training part for modeling, and calculate the accuracy of prediction using all samples in your test set. Repeat this process, increasing the k, and see which k is the best for your model.
+# We can calculate the accuracy of KNN for different values of k.
+Ks = 10
+mean_acc = np.zeros((Ks-1))
+std_acc = np.zeros((Ks-1))
+
+for n in range(1,Ks):
+    
+  #Train Model and Predict  
+  neigh = KNeighborsClassifier(n_neighbors = n).fit(X_train,y_train)
+  yhat=neigh.predict(X_test)
+  mean_acc[n-1] = metrics.accuracy_score(y_test, yhat)
+
+  
+  std_acc[n-1]=np.std(yhat==y_test)/np.sqrt(yhat.shape[0])
+
+mean_acc
+print(mean_acc)
+##############################################################
+
+##############################################################
+# Plot the model accuracy for a different number of neighbors.
+plt.plot(range(1,Ks),mean_acc,'g')
+plt.fill_between(range(1,Ks),mean_acc - 1 * std_acc,mean_acc + 1 * std_acc, alpha=0.10)
+plt.fill_between(range(1,Ks),mean_acc - 3 * std_acc,mean_acc + 3 * std_acc, alpha=0.10,color="green")
+plt.legend(('Accuracy ', '+/- 1xstd','+/- 3xstd'))
+plt.ylabel('Accuracy ')
+plt.xlabel('Number of Neighbors (K)')
+plt.tight_layout()
+plt.show()
+
+print( "The best accuracy was with", mean_acc.max(), "with k=", mean_acc.argmax()+1) 
+##############################################################
