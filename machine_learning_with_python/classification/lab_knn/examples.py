@@ -53,7 +53,6 @@ print('Train set:', X_train.shape, y_train.shape)
 print('Test set:', X_test.shape, y_test.shape)
 
 # Classification - K nearest neighbor (knn) 
-
 # -> Training 
 k = 4
 neigh = KNeighborsClassifier(n_neighbors=k).fit(X_train, y_train)
