@@ -40,7 +40,7 @@ def decision_boundary(X, y, model, iris, two=None):
     for i in set_:
       idx = np.where(iris.target == i)
       plt.scatter(X[idx, 0], X[idx, 1], marker='x', color='black')
-    plt.show()
+    plt.show()  
 
 
 # This function will plot the probability of belonging to each class; Each column is the probability of belonging to na class and the row number is the sample number
