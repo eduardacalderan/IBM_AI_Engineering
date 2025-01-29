@@ -1,12 +1,11 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn import datasets
-from sklearn.svm import SVC
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score
-import pandas as pd
 
-from utils import decision_boundary, plot_probability_array
+from utils import plot_probability_array
+
 
 # In ths lab we will use the iris dataset, it consists of three different types of irises’ (Setosa y=0, Versicolour y=1, and Virginica y=2), petal and sepal length, stored in a 150x4 numpy.ndarray.
 

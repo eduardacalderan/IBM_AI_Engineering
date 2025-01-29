@@ -1,4 +1,10 @@
 {
   "spellright.language": ["en", "pt"],
-  "spellright.documentTypes": ["markdown", "latex", "plaintext", "python"]
+  "spellright.documentTypes": [
+    "markdown",
+    "latex",
+    "plaintext",
+    "python"
+  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
